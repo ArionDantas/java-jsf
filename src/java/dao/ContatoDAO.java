@@ -19,10 +19,9 @@ public class ContatoDAO {
     Contato contato = new Contato();
 
     //CRUD
-    public boolean create(Contato contato) {
+    public boolean addContato(Contato contato) {
         boolean resposta = false;
 
-        
         //Definindo o comando que será executado no DB.
         String sql;
         
@@ -56,26 +55,25 @@ public class ContatoDAO {
         return resposta;
     }
 
-    public List<Contato> read() {
+    public List<Contato> buscar() {
         List contatos = new ArrayList();
-        conn = MyConnection.getConnection();
         String sql = "select * from contato";
 
         try {
+            conn = MyConnection.getConnection();
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
             while (rs.next()) {
-                Contato contato = new Contato();
-                contato.setId(rs.getInt("idContato"));
-                contato.setNome(rs.getString("nome"));
-                contato.setEmail(rs.getString("email"));
-                contato.setTelefone(rs.getString("telefonel"));
+                Contato con = new Contato();
+                con.setId(rs.getInt("id_contato"));
+                con.setNome(rs.getString("nome"));
+                con.setEmail(rs.getString("email"));
+                con.setTelefone(rs.getString("telefonel"));
                 //Adicionando o aluno na lista de alunos
-                contatos.add(contato);
-
+                contatos.add(con);
             }
         } catch (SQLException e) {
-            System.out.println("Ops!... Erro ao selecionar Alunos!"+e);
+            System.out.println("Ops!... Erro ao selecionar contatos!"+e);
         } finally {
             MyConnection.closeConnection(conn, stmt, rs);
         }
@@ -106,14 +104,14 @@ public class ContatoDAO {
     public boolean delete(int id) {
         boolean resposta = false;
         conn = MyConnection.getConnection();
-        String sql = "delete from aluno where idAluno=?";
+        String sql = "delete from contato where id_contato=?";
         try {
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, id);
             stmt.executeUpdate();
             resposta = true;
         } catch (SQLException e) {
-            System.out.println("Ops!... Erro ao tentar excluir Alunos!"+e);
+            System.out.println("Ops!... Erro ao tentar excluir contato!"+e);
         }finally{
             MyConnection.closeConnection(conn, stmt);
         }
@@ -122,31 +120,5 @@ public class ContatoDAO {
 
     public boolean update(int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Aluno findId(int idAluno) {
-        Aluno alu = new Aluno();
-        conn = MyConnection.getConnection();
-        String sql = "select * from aluno where idAluno = ?";
-
-        try {
-            stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, idAluno);
-            rs = stmt.executeQuery();
-            while (rs.next()) {               
-                alu.setIdAluno(rs.getInt("idAluno"));
-                alu.setNome(rs.getString("nome"));
-                alu.setEmail(rs.getString("email"));
-                alu.setTelefone(rs.getString("telefonel"));
-                alu.setIdade(rs.getInt("idade"));
-                
-
-            }
-        } catch (SQLException e) {
-            System.out.println("Ops!... Erro ao selecionar Aluno!"+e);
-        } finally {
-            MyConnection.closeConnection(conn, stmt, rs);
-        }
-          return alu;
     }
 }
