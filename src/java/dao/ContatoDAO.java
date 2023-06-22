@@ -80,27 +80,6 @@ public class ContatoDAO {
           return contatos;    
     }
 
-//    public boolean update(Contato aluno) {
-//        boolean resposta = false;
-//        conn = MyConnection.getConnection();
-//        String sql = "update aluno set nome=?, email=?, telefonel=?, idade=? where idAluno=?";
-//        try {
-//            stmt = conn.prepareStatement(sql);
-//            stmt.setString(1, aluno.getNome());
-//            stmt.setString(2, aluno.getEmail());
-//            stmt.setString(3, aluno.getTelefone());
-//            stmt.setInt(4, aluno.getIdade());
-//            stmt.setInt(5, aluno.getIdAluno());
-//            stmt.executeUpdate();
-//            resposta = true;
-//        } catch (SQLException e) {
-//            System.out.println("Ops!... Erro ao atualizar Alunos!"+e);
-//        }finally{
-//            MyConnection.closeConnection(conn, stmt);
-//        }
-//        return resposta;
-//    }
-
     public boolean delete(int id) {
         boolean resposta = false;
         conn = MyConnection.getConnection();
