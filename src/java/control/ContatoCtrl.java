@@ -64,4 +64,21 @@ public class ContatoCtrl {
             adicionarMensagem("Ops!", "Erro ao tentar excluir contato!", FacesMessage.SEVERITY_INFO);
         }
     }
+    
+    public Contato getContato() {
+        return contato;
+    }
+    
+    public void setContato(Contato contato) {
+        this.contato = contato;
+    }
+    
+    public List<Contato> getLista() {
+        return lista;
+    }
+    
+    public void setLista(List<Contato> lista) {
+        this.lista = lista;
+    }
+    
 }

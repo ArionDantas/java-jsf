@@ -1,12 +1,58 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        <h1>Projeto Java Server - JSF</h1>
+        <br/>
+        <h:form>
+            <p:fieldset legend="Dados do Contato">
+                <p:panelGrid columns="8">
+                    <h:outputLabel for="nomeContato" value="*Nome" />
+                    <p:inputText id="nomeContato" type="text" value="#{contatoCtrl.contato.nome}" label="Nome contato"/>
+                    <h:outputLabel for="emailContato" value="*Email" />
+                    <p:inputText id="emailContato" type="text" value="#{contatoCtrl.contato.email}"/>
+                    <h:outputLabel for="telefoneContato" value="*Telefone" />
+                    <p:inputMask mask="(99)99999-9999" id="telefoneContato" value="#{contatoCtrl.contato.telefone}"/>
+                </p:panelGrid>
+                <br/>
+                <p:toolbar>
+                    <p:toolbarGroup align="left">
+                        <p:commandButton value="Salvar" action="#{contatoCtrl.adicionar()}" update="@form"></p:commandButton>
+                        <p:commandButton value="Limpar" action="#{contatoCtrl.apagar(c)}" update=""></p:commandButton>
+                        <p:commandButton value="Buscar" action="#{contatoCtrl.listar()}" update=""></p:commandButton>
+                    </p:toolbarGroup>
+                </p:toolbar>
+                <p:messages showDetail="true">
+                    
+                </p:messages>
+            </p:fieldset>
+            
+            <p:fieldset>
+                <p:dataTable value="#{contatoCtrl.lista}" var="cl">
+                    <p:column headerText="ID" sortBy="#{cl.id}">
+                        <h:outputText value="#{cl.id}"/>
+                    </p:column>
+                    <p:column headerText="Contato" sortBy="#{cl.nome}">
+                        <h:outputText value="#{cl.nome}"/>
+                    </p:column>
+                    <p:column headerText="Email" sortBy="#{cl.email}">
+                        <h:outputText value="#{cl.email}"/>
+                    </p:column>
+                    <p:column headerText="Telefone" sortBy="#{cl.telefone}">
+                        <h:outputText value="#{cl.telefone}"/>
+                    </p:column>
+                    <p:column headerText="Ações">
+                        <p:commandButton value="Editar" action="#{contatoCtrl.editar(cl)}" update="@form"></p:commandButton>
+                        <p:commandButton value="Apagar" action="#{contatoCtrl.apagar(cl)}" update="@form"></p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:fieldset>
+        </h:form>
     </h:body>
 </html>
 

@@ -56,7 +56,7 @@ public class ContatoDAO {
     }
 
     public List<Contato> buscar() {
-        List contatos = new ArrayList();
+        List<Contato> contatos = new ArrayList<>();
         String sql = "select * from contato";
 
         try {
